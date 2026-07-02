@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celengan Couple | Abiyu & Manda</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons (CDN) for premium modern icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- CSS Style -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Glowing Background Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="heart-icon animate-pulse">❤️</span>
+        <h1>Celengan Couple</h1>
+      </div>
+      <div class="couple-tag">
+        <span id="header-user1">Abiyu</span>
+        <span class="heart-divider">💖</span>
+        <span id="header-user2">Manda</span>
+      </div>
+      <!-- Sync Status Badge -->
+      <div id="sync-status" class="sync-badge syncing">
+        <i data-lucide="refresh-cw" class="icon-spin"></i>
+        <span>Menyinkronkan...</span>
+      </div>
+    </header>
+
+    <!-- Main Grid Layout -->
+    <main class="app-grid">
+      
+      <!-- Left Column: Dashboard & Quick Actions -->
+      <section class="grid-col left-col">
+        <!-- Main Balance Card -->
+        <div class="card balance-card">
+          <div class="card-bg-gradient"></div>
+          <div class="balance-content">
+            <span class="card-subtitle">Total Celengan Terkumpul</span>
+            <h2 id="total-balance" class="balance-amount">Rp 0</h2>
+            <div class="balance-stats">
+              <div class="stat-item">
+                <i data-lucide="trending-up" class="color-deposit"></i>
+                <div>
+                  <span class="stat-label">Total Setoran</span>
+                  <span id="total-deposits" class="stat-val">Rp 0</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <i data-lucide="trending-down" class="color-withdraw"></i>
+                <div>
+                  <span class="stat-label">Total Penarikan</span>
+                  <span id="total-withdrawals" class="stat-val">Rp 0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Couples Profile contribution -->
+        <div class="card profiles-card">
+          <div class="card-header">
+            <h3><i data-lucide="users"></i> Distribusi Kontribusi</h3>
+            <button class="btn-icon" id="btn-edit-profiles" title="Edit Profil"><i data-lucide="settings"></i></button>
+          </div>
+          <div class="profiles-container">
+            <!-- User 1 (Abiyu) -->
+            <div class="profile-box" id="profile-user1">
+              <div class="avatar-wrapper">
+                <div class="avatar-ring" style="border-color: var(--user1-color);"></div>
+                <div class="avatar-icon" id="user1-avatar-icon">🧑‍💻</div>
+              </div>
+              <h4 id="user1-name">Abiyu</h4>
+              <span class="contribution-amount" id="user1-contrib">Rp 0</span>
+              <span class="contribution-percentage" id="user1-pct">0%</span>
+            </div>
+
+            <div class="versus-divider">VS</div>
+
+            <!-- User 2 (Manda) -->
+            <div class="profile-box" id="profile-user2">
+              <div class="avatar-wrapper">
+                <div class="avatar-ring" style="border-color: var(--user2-color);"></div>
+                <div class="avatar-icon" id="user2-avatar-icon">👩‍💻</div>
+              </div>
+              <h4 id="user2-name">Manda</h4>
+              <span class="contribution-amount" id="user2-contrib">Rp 0</span>
+              <span class="contribution-percentage" id="user2-pct">0%</span>
+            </div>
+          </div>
+          <!-- Progress Bar Split -->
+          <div class="split-progress-bar">
+            <div id="split-progress-user1" class="split-progress-fill user1" style="width: 50%;"></div>
+            <div id="split-progress-user2" class="split-progress-fill user2" style="width: 50%;"></div>
+          </div>
+        </div>
+
+        <!-- Transaction Form Card -->
+        <div class="card form-card">
+          <h3><i data-lucide="plus-circle"></i> Tambah Setoran / Penarikan</h3>
+          <form id="transaction-form">
+            <!-- Selector Siapa -->
+            <div class="form-group">
+              <label>Siapa yang bertransaksi?</label>
+              <div class="toggle-user-selector">
+                <label class="user-select-btn active" id="btn-select-user1" for="radio-user1">
+                  <input type="radio" name="transaction-user" id="radio-user1" value="user1" checked>
+                  <span id="label-select-user1">Abiyu</span>
+                </label>
+                <label class="user-select-btn" id="btn-select-user2" for="radio-user2">
+                  <input type="radio" name="transaction-user" id="radio-user2" value="user2">
+                  <span id="label-select-user2">Manda</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Tipe Transaksi -->
+            <div class="form-group">
+              <label>Jenis Transaksi</label>
+              <div class="toggle-type-selector">
+                <label class="type-select-btn active color-deposit" for="radio-setor">
+                  <input type="radio" name="transaction-type" id="radio-setor" value="setor" checked>
+                  <i data-lucide="plus"></i> Setor
+                </label>
+                <label class="type-select-btn color-withdraw" for="radio-tarik">
+                  <input type="radio" name="transaction-type" id="radio-tarik" value="tarik">
+                  <i data-lucide="minus"></i> Tarik
+                </label>
+              </div>
+            </div>
+
+            <!-- Jumlah Uang -->
+            <div class="form-group">
+              <label for="amount">Jumlah Nominal (Rp)</label>
+              <div class="input-prefix-wrapper">
+                <span class="input-prefix">Rp</span>
+                <input type="text" id="amount" placeholder="0" required autocomplete="off">
+              </div>
+              <!-- Quick Saving presets -->
+              <div class="quick-presets">
+                <button type="button" class="btn-preset" data-val="10000">+10k</button>
+                <button type="button" class="btn-preset" data-val="20000">+20k</button>
+                <button type="button" class="btn-preset" data-val="50000">+50k</button>
+                <button type="button" class="btn-preset" data-val="100000">+100k</button>
+                <button type="button" class="btn-preset" data-val="200000">+200k</button>
+              </div>
+            </div>
+
+            <!-- Catatan -->
+            <div class="form-group">
+              <label for="note">Catatan / Keperluan</label>
+              <input type="text" id="note" placeholder="Contoh: Sisa uang jajan, beli bensin, dll." required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <i data-lucide="check"></i> Simpan Transaksi
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Right Column: Goals, Challenges & History -->
+      <section class="grid-col right-col">
+        <!-- Savings Goals Card -->
+        <div class="card goals-card">
+          <div class="card-header">
+            <h3><i data-lucide="target"></i> Impian Kita Bersama</h3>
+            <button class="btn btn-secondary btn-sm" id="btn-add-goal">
+              <i data-lucide="plus"></i> Tambah Impian
+            </button>
+          </div>
+          <div id="goals-list" class="goals-list">
+            <!-- Dihasilkan dinamis oleh JS -->
+          </div>
+        </div>
+
+        <!-- 30-Day Saving Challenge -->
+        <div class="card challenge-card">
+          <div class="card-header">
+            <h3><i data-lucide="trophy"></i> Tantangan Menabung 30 Hari</h3>
+            <span class="challenge-sub">Setor Rp 20.000 / hari</span>
+          </div>
+          <div class="challenge-info">
+            <span id="challenge-count">Selesai: 0 dari 30 hari</span>
+            <div class="challenge-bar-bg">
+              <div id="challenge-progress-fill" class="challenge-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+          <div class="challenge-grid" id="challenge-grid">
+            <!-- Dihasilkan dinamis oleh JS -->
+          </div>
+          <button id="btn-challenge-deposit" class="btn btn-accent btn-block mt-3">
+            <i data-lucide="sparkles"></i> Isi Tantangan Hari Ini
+          </button>
+        </div>
+
+        <!-- Transaction History Card -->
+        <div class="card history-card">
+          <div class="card-header-stack">
+            <div class="card-header">
+              <h3><i data-lucide="history"></i> Riwayat Tabungan</h3>
+            </div>
+            <!-- Filters -->
+            <div class="filters-row">
+              <button class="filter-btn active" data-filter="all">Semua</button>
+              <button class="filter-btn" data-filter="user1" id="filter-user1">Abiyu</button>
+              <button class="filter-btn" data-filter="user2" id="filter-user2">Manda</button>
+              <button class="filter-btn" data-filter="setor">Setoran</button>
+              <button class="filter-btn" data-filter="tarik">Penarikan</button>
+            </div>
+          </div>
+          <div class="history-list-wrapper">
+            <div id="history-list" class="history-list">
+              <!-- Dihasilkan dinamis oleh JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Controls -->
+    <footer class="app-footer-controls">
+      <p class="love-note">Dibuat dengan ❤️ untuk Abiyu & Manda</p>
+      <div class="backup-actions">
+        <button id="btn-export" class="btn btn-secondary btn-sm" title="Download backup data">
+          <i data-lucide="download"></i> Ekspor Data
+        </button>
+        <button id="btn-import-trigger" class="btn btn-secondary btn-sm" title="Upload backup data">
+          <i data-lucide="upload"></i> Impor Data
+        </button>
+        <input type="file" id="file-import" accept=".json" style="display: none;">
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- Modal: Tambah/Edit Impian -->
+  <div class="modal-backdrop" id="goal-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="goal-modal-title">Tambah Impian Baru</h3>
+        <button class="btn-close-modal" id="btn-close-goal-modal">&times;</button>
+      </div>
+      <form id="goal-form">
+        <input type="hidden" id="goal-id">
+        <div class="form-group">
+          <label for="goal-name">Nama Impian</label>
+          <input type="text" id="goal-name" placeholder="Contoh: Liburan ke Bali" required>
+        </div>
+        <div class="form-group">
+          <label for="goal-target">Target Dana (Rp)</label>
+          <input type="number" id="goal-target" placeholder="Contoh: 5000000" min="1000" required>
+        </div>
+        <div class="form-group">
+          <label for="goal-deadline">Batas Waktu (Deadline)</label>
+          <input type="date" id="goal-deadline" required>
+        </div>
+        <div class="form-group">
+          <label for="goal-icon">Pilih Emoji/Ikon</label>
+          <div class="emoji-selector">
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="✈️" checked><span>✈️</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="🕯️"><span>🕯️</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="🏡"><span>🏡</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="💍"><span>💍</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="🚗"><span>🚗</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="🎁"><span>🎁</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="☕"><span>☕</span></label>
+            <label class="emoji-option"><input type="radio" name="goal-emoji" value="🎮"><span>🎮</span></label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Simpan Impian</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Profil -->
+  <div class="modal-backdrop" id="profile-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Pengaturan Profil Couple</h3>
+        <button class="btn-close-modal" id="btn-close-profile-modal">&times;</button>
+      </div>
+      <form id="profile-form">
+        <!-- Profil User 1 -->
+        <div class="profile-settings-section">
+          <h4>Profil User 1</h4>
+          <div class="form-group">
+            <label for="settings-user1-name">Nama Panggilan</label>
+            <input type="text" id="settings-user1-name" required>
+          </div>
+          <div class="form-group">
+            <label for="settings-user1-color">Warna Tema</label>
+            <input type="color" id="settings-user1-color">
+          </div>
+          <div class="form-group">
+            <label for="settings-user1-avatar">Avatar Emoji</label>
+            <input type="text" id="settings-user1-avatar" placeholder="Contoh: 🧑‍💻" maxlength="2">
+          </div>
+        </div>
+
+        <hr class="modal-divider">
+
+        <!-- Profil User 2 -->
+        <div class="profile-settings-section">
+          <h4>Profil User 2</h4>
+          <div class="form-group">
+            <label for="settings-user2-name">Nama Panggilan</label>
+            <input type="text" id="settings-user2-name" required>
+          </div>
+          <div class="form-group">
+            <label for="settings-user2-color">Warna Tema</label>
+            <input type="color" id="settings-user2-color">
+          </div>
+          <div class="form-group">
+            <label for="settings-user2-avatar">Avatar Emoji</label>
+            <input type="text" id="settings-user2-avatar" placeholder="Contoh: 👩‍💻" maxlength="2">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Simpan Profil</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div id="confetti-container" class="confetti-container"></div>
+
+  <!-- JS Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
